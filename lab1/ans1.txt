@@ -1,0 +1,27 @@
+
+.globl _start  
+
+_start:  
+    # 设置系统调用号为 sys_write (64)  
+    li a7, 64  
+
+    # 设置文件描述符为标准输出 (1)  
+    li a0, 1  
+
+    # 设置要输出的字符串地址  
+    la a1, msg  
+
+    # 设置要输出的字符串长度  
+    li a2, 13  
+
+    # 执行系统调用  
+    ecall  
+
+    # 设置退出状态为 0  
+    li a7, 93  
+    li a0, 0  
+    ecall  
+
+
+msg:  
+    .string "Hello, World!"

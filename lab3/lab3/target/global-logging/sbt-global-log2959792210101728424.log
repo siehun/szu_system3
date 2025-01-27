@@ -1,0 +1,5 @@
+[debug] > Exec(;project ; clearCaches, None, None)
+[debug] > Exec(project, None, None)
+[info] root (in build file:/C:/Users/东行/Desktop/comp-syst/lab3/lab3/)
+[debug] > Exec(clearCaches, None, None)
+[debug] > Exec(idea-shell, None, None)

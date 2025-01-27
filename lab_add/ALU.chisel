@@ -1,0 +1,27 @@
+import chisel3._
+import chisel3.util.Mux1H
+
+class ALU(val data_width: Int, val op_width: Int)
+  extends RawModule {  
+  
+  // io port definition
+  val io = IO(new Bundle { 
+    val a = Input(UInt(data_width.W))
+    val b = Input(UInt(data_width.W))
+    val op = Input(UInt(op_width.W))
+    val out = Output(UInt(data_width.W))
+  })
+    
+  // rtl design            
+  // using one-hot encoding to define operations
+  when(!io.op.orR) {       
+    io.out := io.a + io.b // add
+  }.otherwise {
+    io.out := Mux1H(Seq(                                                    
+      io.op(0) -> (io.a - io.b), // sub
+      io.op(1) -> (io.a & io.b), // and
+      io.op(2) -> (io.a ^ io.b), // xor
+      io.op(3) -> (io.a << io.b) // sll
+    ))
+  }
+}
